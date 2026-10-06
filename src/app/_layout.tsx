@@ -1,10 +1,19 @@
-import { Stack } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Stack } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <Stack />
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="new-message"
+          options={{
+            presentation: "modal",
+            title: "New Message",
+          }}
+        />
+      </Stack>
     </SafeAreaProvider>
   );
 }
