@@ -2,12 +2,12 @@ import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { CONTACTS } from "@/data/contacts";
+import { useFavourites } from "@/context/FavouritesContext";
 
 export default function ContactDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
-
+  const { isFavourite, toggle } = useFavourites();
   const router = useRouter();
-
   const contact = CONTACTS.find((contact) => contact.id === id);
 
   if (!contact) {
@@ -27,6 +27,13 @@ export default function ContactDetail() {
       <Stack.Screen
         options={{
           title: contact.name,
+          headerRight: () => (
+            <Pressable onPress={() => toggle(contact.id)}>
+              <Text style={styles.favLabel}>
+                {isFavourite(contact.id) ? "★ Favourite" : "☆ Add to favourites"}
+              </Text>
+            </Pressable>
+          ),
         }}
       />
 
@@ -132,4 +139,8 @@ const styles = StyleSheet.create({
     color: "#25D366",
     fontWeight: "600",
   },
+
+  favButton: { borderWidth: 1, borderColor: "#f39c12", borderRadius: 24,
+             paddingVertical: 10, paddingHorizontal: 20, marginTop: 16 },
+  favLabel:  { color: "#b9770e", fontWeight: "600" },
 });
