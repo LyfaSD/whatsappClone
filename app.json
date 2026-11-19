@@ -26,6 +26,19 @@
     "plugins": [
       "expo-router",
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "DAUST Messenger uses your photo library only when you choose a photo to send in a conversation.",
+          "cameraPermission": "DAUST Messenger uses the camera only when you tap the camera button to take a photo for a conversation."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "DAUST Messenger uses your foreground position only when you tap the location button to share your location in a conversation."
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "backgroundColor": "#208AEF",
